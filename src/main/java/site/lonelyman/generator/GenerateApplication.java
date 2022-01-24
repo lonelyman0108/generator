@@ -19,34 +19,36 @@ public class GenerateApplication {
 
         FastAutoGenerator.create(config.getUrl(), config.getUsername(), config.getPassword())
                 // 全局配置
-                .globalConfig(builder -> {
-                    builder.author(config.getAuthor())
-                            .enableSwagger()
-                            .fileOverride()
-                            .disableOpenDir()
-                            .outputDir("./output/main/java");
-                })
+                .globalConfig(builder ->
+                        builder.author(config.getAuthor())
+                                .enableSwagger()
+                                .fileOverride()
+                                .disableOpenDir()
+                                .outputDir("./output/main/java")
+                )
                 // 包配置
-                .packageConfig(builder -> {
-                    builder.parent(config.getPackageName()) // 设置父包名
-                            .moduleName(config.getModuleName()) // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "./output/main/resources/mapper"));
-                })
+                .packageConfig(builder ->
+                        builder.parent(config.getPackageName()) // 设置父包名
+                                .moduleName(config.getModuleName()) // 设置父包模块名
+                                .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "./output/main/resources/mapper"))
+                )
                 // 模板配置
-                .templateConfig(builder -> {
-                    builder.entity("template/entity.java.vm")
-                            .mapper("template/mapper.java.vm")
-                            .mapperXml("template/mapper.xml.vm")
-                            .service("template/service.java.vm")
-                            .serviceImpl("template/serviceImpl.java.vm")
-                            .controller("template/controller.java.vm");
-                })
+                .templateConfig(builder ->
+                        builder.entity("template/entity.java.vm")
+                                .mapper("template/mapper.java.vm")
+                                .mapperXml("template/mapper.xml.vm")
+                                .service("template/service.java.vm")
+                                .serviceImpl("template/serviceImpl.java.vm")
+                                .controller("template/controller.java.vm")
+                )
                 // 策略配置
-                .strategyConfig(builder -> {
-                    builder.addInclude(config.getTables())
-                            .entityBuilder()
-                            .enableLombok();
-                })
+                .strategyConfig(builder ->
+                        builder.addInclude(config.getTables())
+                                .entityBuilder()
+                                .enableLombok()
+                                .controllerBuilder()
+                                .enableRestStyle()
+                )
 
                 .execute();
     }
