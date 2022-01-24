@@ -1,0 +1,16 @@
+generator:
+  # 数据库数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/lmblog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  # 代码作者
+  author: LM
+  # 包名
+  packageName: site.lonelyman
+  # 模块名
+  moduleName: test
+  # 需生成的表名
+  tables:
+    - about
+    - tag

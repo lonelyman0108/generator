@@ -1,0 +1,8 @@
+output/
+
+target/
+
+.idea
+*.iml
+out
+gen
