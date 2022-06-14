@@ -1,5 +1,6 @@
 package site.lonelyman.generator;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import org.apache.commons.lang3.ObjectUtils;
@@ -20,12 +21,15 @@ public class GenerateApplication {
 
         FastAutoGenerator.create(config.getUrl(), config.getUsername(), config.getPassword())
                 // 全局配置
-                .globalConfig(builder ->
-                        builder.author(config.getAuthor())
-                                .enableSwagger()
-                                .fileOverride()
-                                .disableOpenDir()
-                                .outputDir("./output/main/java")
+                .globalConfig(builder -> {
+                            builder.author(config.getAuthor())
+                                    .fileOverride()
+                                    .disableOpenDir()
+                                    .outputDir("./output/main/java");
+                            if (config.isEnableSwagger()) {
+                                builder.enableSwagger();
+                            }
+                        }
                 )
                 // 包配置
                 .packageConfig(builder ->
@@ -48,7 +52,7 @@ public class GenerateApplication {
                                     .enableLombok()
                                     .controllerBuilder()
                                     .enableRestStyle();
-                            if (ObjectUtils.isNotEmpty(config.getTables()) && config.getTables().size() > 1) {
+                            if (CollectionUtils.isNotEmpty(config.getTables()) && config.getTables().size() > 1) {
                                 builder.addInclude(config.getTables());
                             }
                         }

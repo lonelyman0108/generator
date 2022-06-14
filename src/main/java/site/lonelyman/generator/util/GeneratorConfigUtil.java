@@ -20,7 +20,8 @@ public class GeneratorConfigUtil {
                 instance.getValueByKey("generator.author") + "",
                 instance.getValueByKey("generator.packageName") + "",
                 instance.getValueByKey("generator.moduleName") + "",
-                (List<String>) instance.getValueByKey("generator.tables")
+                (List<String>) instance.getValueByKey("generator.tables"),
+                Boolean.getBoolean(instance.getValueByKey("generator.enableSwagger") + "")
         );
     }
 }

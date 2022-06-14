@@ -12,3 +12,6 @@ generator:
   moduleName: api
   # 需生成的表名
   tables:
+    -
+  # 是否开启Swagger注解
+  enableSwagger: false

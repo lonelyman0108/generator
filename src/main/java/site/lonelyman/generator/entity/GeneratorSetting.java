@@ -21,4 +21,5 @@ public class GeneratorSetting {
     private String packageName;
     private String moduleName;
     private List<String> tables;
+    private boolean enableSwagger;
 }
