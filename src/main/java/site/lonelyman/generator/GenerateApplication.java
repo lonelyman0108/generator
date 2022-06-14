@@ -1,9 +1,12 @@
 package site.lonelyman.generator;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.fill.Column;
 import org.apache.commons.lang3.ObjectUtils;
+import site.lonelyman.generator.entity.BaseEntity;
 import site.lonelyman.generator.entity.GeneratorSetting;
 import site.lonelyman.generator.util.GeneratorConfigUtil;
 
@@ -49,9 +52,22 @@ public class GenerateApplication {
                 // 策略配置
                 .strategyConfig(builder -> {
                             builder.entityBuilder()
+                                    .superClass(BaseEntity.class)
+                                    .disableSerialVersionUID()
+                                    .enableChainModel()
+                                    .addSuperEntityColumns(
+                                            "id",
+                                            "create_time",
+                                            "update_time",
+                                            "create_user_id",
+                                            "update_user_id",
+                                            "is_deleted"
+                                    )
                                     .enableLombok()
                                     .controllerBuilder()
-                                    .enableRestStyle();
+                                    .enableRestStyle()
+                                    .mapperBuilder()
+                                    .enableMapperAnnotation();
                             if (CollectionUtils.isNotEmpty(config.getTables()) && config.getTables().size() > 1) {
                                 builder.addInclude(config.getTables());
                             }

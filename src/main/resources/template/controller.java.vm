@@ -20,6 +20,7 @@ import ${superControllerClassPackage};
  * @author ${author}
  * @since ${date}
  */
+
 #if(${restControllerStyle})
 @RestController
 #else

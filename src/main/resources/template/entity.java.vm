@@ -12,6 +12,9 @@ import lombok.Data;
 #if(${chainModel})
 import lombok.experimental.Accessors;
 #end
+  #if(${superEntityClass})
+import lombok.EqualsAndHashCode;
+  #end
 #end
 
 /**
@@ -22,6 +25,7 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
+
 #if(${entityLombokModel})
 @Data
   #if(${chainModel})
@@ -35,11 +39,14 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "${entity}对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
+  #if(${entityLombokModel})
+@EqualsAndHashCode(callSuper = true)
+  #end
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
 #elseif(${entitySerialVersionUID})
-public class ${entity} implements Serializable {
+public class ${entity} implements Serializable{
 #else
 public class ${entity} {
 #end
