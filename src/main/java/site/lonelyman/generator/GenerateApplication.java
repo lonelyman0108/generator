@@ -2,6 +2,7 @@ package site.lonelyman.generator;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import org.apache.commons.lang3.ObjectUtils;
 import site.lonelyman.generator.entity.GeneratorSetting;
 import site.lonelyman.generator.util.GeneratorConfigUtil;
 
@@ -42,14 +43,16 @@ public class GenerateApplication {
                                 .controller("template/controller.java.vm")
                 )
                 // 策略配置
-                .strategyConfig(builder ->
-                        builder.addInclude(config.getTables())
-                                .entityBuilder()
-                                .enableLombok()
-                                .controllerBuilder()
-                                .enableRestStyle()
+                .strategyConfig(builder -> {
+                            builder.entityBuilder()
+                                    .enableLombok()
+                                    .controllerBuilder()
+                                    .enableRestStyle();
+                            if (ObjectUtils.isNotEmpty(config.getTables()) && config.getTables().size() > 1) {
+                                builder.addInclude(config.getTables());
+                            }
+                        }
                 )
-
                 .execute();
     }
 }

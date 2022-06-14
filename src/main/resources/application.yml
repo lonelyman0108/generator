@@ -9,8 +9,6 @@ generator:
   # 包名
   packageName: site.lonelyman
   # 模块名
-  moduleName: test
+  moduleName: api
   # 需生成的表名
   tables:
-    - about
-    - tag
